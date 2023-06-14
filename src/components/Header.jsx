@@ -1,8 +1,13 @@
-import React from 'react';
-import { BoltIcon } from '@heroicons/react/24/solid'
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import {
+    BoltIcon,
+    Bars3BottomRightIcon,
+    XMarkIcon,
+  } from '@heroicons/react/24/solid'
 
 const Header = () => {
+    const [open, setOpen] = useState(false)
     return (
         <div className='mx-9'>
             {/* header-section */}
@@ -16,11 +21,23 @@ const Header = () => {
             </div>
             <div>
                      {/* Nav items section */}
-          <ul className='lg:flex lg:space-x-8 font-semibold'>
+          <ul className={`lg:flex absolute ${open? 'top-6':'-top-96'}`}>
             <li><NavLink  to="/"> Home </NavLink></li>
             <li><NavLink  to="/books"> Books </NavLink></li>
             <li> <NavLink  to="/about"> About Us </NavLink></li>
           </ul>
+          {/* Mobile Navbar section */}
+          <div className='lg:hidden'>
+            <button onClick={()=> setOpen(!open)}>
+            <span>
+            {
+            open === true ?
+             <XMarkIcon className='w-5 text-gray-600' /> 
+             :<Bars3BottomRightIcon className='w-5 text-gray-600' />
+             }
+             </span>
+            </button>
+          </div>
           </div>
           </div>
            
