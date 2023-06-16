@@ -9,10 +9,14 @@ import {
 import Home from './components/Home.jsx';
 import Books from './components/Books.jsx';
 import About from './components/About.jsx';
+import BookDetails from './components/BookDetails.jsx';
+import ErrorPage from './components/ErrorPage.jsx';
+
 const router = createBrowserRouter([
   {
     path: "/",
     element:<App/>,
+    errorElement:<ErrorPage/>,
     children:[
       {
         path:"/",
@@ -21,11 +25,19 @@ const router = createBrowserRouter([
       {
         path:"/books",
         element:<Books/>,
+        loader: ()=> fetch('https://api.itbook.store/1.0/new'),
       },
+      {
+        path:"/book/:id",
+        element:<BookDetails/>,
+        loader:({params}) => fetch(`https://api.itbook.store/1.0/books/${params.id}`),
+      },
+      
       {
         path:"/about",
         element:<About/>,
       },
+     
 
     ]
   },
